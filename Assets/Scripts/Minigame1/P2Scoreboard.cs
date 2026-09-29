@@ -6,7 +6,7 @@ public class P2Scoreboard : MonoBehaviour
     public Player2 player2;
 
     // Update is called once per frame
-    void Update()
+    void Update() //updates p2 scoreboard
     {
         GetComponent<TMP_Text>().text = "Hits: " + Player2.player2Hits;
     }

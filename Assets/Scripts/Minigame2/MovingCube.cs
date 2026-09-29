@@ -21,13 +21,13 @@ public class MovingCube : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void OnEnable()
     {
-        if (LastCube == null)
+        if (LastCube == null) // if there is no previous cube, aka this is the first cube, then finds the spawner/start instead
         {
             LastCube = GameObject.Find("Start").GetComponent<MovingCube>();
         }
-        CurrentCube = this;
+        CurrentCube = this; // this game object becoems the current one
 
-        transform.localScale = new Vector3(
+        transform.localScale = new Vector3( // scales the cube to the same size as the last cube after being cut
             LastCube.transform.localScale.x,
             transform.localScale.y,
             LastCube.transform.localScale.z
@@ -37,7 +37,7 @@ public class MovingCube : MonoBehaviour
     public void Initialize(MoveDirection direction)
     {
         MoveDirection = direction;
-        // GetComponent<MeshRenderer>().material = p1Material;
+        // GetComponent<MeshRenderer>().material = p1Material; old script, tried to change material but didnt work, so changed to if statement below
 
         if (MoveDirection == MoveDirection.Z)
         {
@@ -49,12 +49,12 @@ public class MovingCube : MonoBehaviour
         }
     }
 
-    internal void Stop()
+    internal void Stop() //function for when block is stoped
     {
         moveSpeed = 0f;
-        float hangover = GetHangover();
+        float hangover = GetHangover(); // calculates how much is hanging over the tower, t be cut
 
-        float max = MoveDirection == MoveDirection.Z ? LastCube.transform.localScale.z : LastCube.transform.localScale.x;
+        float max = MoveDirection == MoveDirection.Z ? LastCube.transform.localScale.z : LastCube.transform.localScale.x; //cuts the cube if it is too far off, aka if the hangover is greater than the size of the last cube, then it will fall and end the game
         if (Mathf.Abs(hangover) >= max)
         {
             LastCube = null;
@@ -77,7 +77,7 @@ public class MovingCube : MonoBehaviour
         LastCube = this;
     }
 
-    private void SplitCubeOnX(float hangover, float direction)
+    private void SplitCubeOnX(float hangover, float direction) //cuts the cube scale for future cubes scale
     {
         float newXSize = LastCube.transform.localScale.x - Mathf.Abs(hangover);
         float fallingBlockSize = transform.localScale.x - newXSize;
@@ -93,7 +93,7 @@ public class MovingCube : MonoBehaviour
 
     }
 
-    private void SplitCubeOnZ(float hangover, float direction)
+    private void SplitCubeOnZ(float hangover, float direction) //cuts the cube scale for future cubes scale
     {
         float newZSize = LastCube.transform.localScale.z - Mathf.Abs(hangover);
         float fallingBlockSize = transform.localScale.z - newZSize;
@@ -109,7 +109,7 @@ public class MovingCube : MonoBehaviour
 
     }
 
-    private void SpawnDropCube(float fallingBlockZPosition, float fallingBlockSize)
+    private void SpawnDropCube(float fallingBlockZPosition, float fallingBlockSize)//spawn part that falls off the cube
     {
         var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
@@ -139,7 +139,7 @@ public class MovingCube : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void Update() //oscillation of cube, bounces back when it reaches the end of the range, aka 2 or -2
     {
         if (MoveDirection == MoveDirection.Z)
         {

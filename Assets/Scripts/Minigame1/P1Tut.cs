@@ -14,7 +14,7 @@ public class P1Tut : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ArduinoConnector.P1zPos > 3.9f)
+        if (ArduinoConnector.P1zPos > 3.9f) // if at the max, that means its touching the goal, not = 4f as small fluctiations can occur, prevents the annoyance from those resetting the timer
         {
             goalTouch1 = true;
         }
@@ -22,7 +22,7 @@ public class P1Tut : MonoBehaviour
         {
             goalTouch1 = false;
         }
-        rect.anchoredPosition = new Vector2(
+        rect.anchoredPosition = new Vector2( //takes the values of p1ZPos, again the readings of the potentiometer, and alows it to shift car icon
         (550f / 8f) * ArduinoConnector.P1zPos + 175f,
         rect.anchoredPosition.y
         );

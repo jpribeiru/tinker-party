@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class Player2 : MonoBehaviour
-{
+{ //works same as p1 cs
     public static int player2Hits = 0;
 
     void Start()

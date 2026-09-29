@@ -9,12 +9,12 @@ public class GameChooser : MonoBehaviour
     public GameObject minigame2NotReady;
     private string chosenGame = "Minigame1";
 
-    // Update is called once per frame
+    //this script will edit the minigame menu looks to tell which minigame is beign selected. since u choose with the the potentiometer, if p1zpos  is negative (which i use to refer to the readings) that means its too the left, so minigame 1 is selected, and vice versa
     void Update()
     {
         if (ArduinoConnector.P1zPos > 0f)
         {
-            chosenGame = "Minigame1";
+            chosenGame = "Minigame1"; //turns on green icon to show it s beign slected
             minigame1Ready.SetActive(true);
             minigame1NotReady.SetActive(false);
             minigame2Ready.SetActive(false);
@@ -28,7 +28,7 @@ public class GameChooser : MonoBehaviour
             minigame2Ready.SetActive(true);
             minigame2NotReady.SetActive(false);
         }
-        if (ArduinoConnector.button1PressedOnce)
+        if (ArduinoConnector.button1PressedOnce) //loads the scene of game chosebn when button pressed
         {
             SceneManager.LoadScene(chosenGame);
         }

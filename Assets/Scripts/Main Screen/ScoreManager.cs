@@ -3,13 +3,13 @@ using UnityEngine.SceneManagement;
 using TMPro;
 
 public class ScoreManager : MonoBehaviour
-{
+{ //like arduino conector, this cannot be deleted and should always only be one instance of it. at the end of each game, it incrememnebts a permanent variable that tells the score of player 1 and 2, one more point if they win
     public static ScoreManager Instance;
 
     [SerializeField] private int player1Score = 0;
     [SerializeField] private int player2Score = 0;
 
-    public TMP_Text player1ScoreText;
+    public TMP_Text player1ScoreText; // gets thee text objects to change
     public TMP_Text player2ScoreText;
 
     private bool scoreAdded = false;

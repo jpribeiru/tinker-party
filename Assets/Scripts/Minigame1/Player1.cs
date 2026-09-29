@@ -9,7 +9,7 @@ public class Player1 : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy")) //logging hits
         {
             Debug.Log("Player 1 hit an enemy!");
             player1Hits++;
@@ -18,7 +18,7 @@ public class Player1 : MonoBehaviour
 
     void LateUpdate()
     {
-        transform.localPosition = new Vector3(
+        transform.localPosition = new Vector3( //moving script
             transform.localPosition.x,
             transform.localPosition.y,
             ArduinoConnector.P1zPos

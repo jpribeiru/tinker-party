@@ -67,12 +67,15 @@ public class ArduinoConnector : MonoBehaviour
 
         try
         {
-            while (serial.BytesToRead > 0)
+            while (serial.BytesToRead > 0) //if there is something present
             {
-                string data = serial.ReadLine().Trim();
+                string data = serial.ReadLine().Trim(); //cuts off whitespace and new charaacters
 
-                if (data.Length == 0)
+                if (data.Length == 0) //if nothing is present, continue to next loop
                     continue;
+
+                // these next if statements check what is being sent [check the uno script for more details]. here are the following mappings:
+                // 1 = potentiometer 1, 2 = potentiometer 2, 3 = button 1, 4 = button 2
 
                 if (data[0] == '1')
                 {
@@ -80,7 +83,7 @@ public class ArduinoConnector : MonoBehaviour
 
                     if (int.TryParse(valueString, out int value1))
                     {
-                        P1zPos = (value1 / 1023f) * 8 - 4f;
+                        P1zPos = (value1 / 1023f) * 8 - 4f; // turns the range of 0-1023 into -4 to 4, which is the range of the z axis in the game
                     }
                 }
                 else if (data[0] == '2')
@@ -104,7 +107,7 @@ public class ArduinoConnector : MonoBehaviour
 
                             if (!previousButton1State)
                             {
-                                button1PressedOnce = true;
+                                button1PressedOnce = true; // when button is held, it will keep sending 1 signals, ti prevent the game recognising the game being pressed multiple times really quickly, this little statement checks that the button has been hled down once and only stores a pressedDownOnce variable to tryue, only becoming false when button is released. basically, no matter how long i hold, the variable will allow other scripts to see that ive pressed it just once
                                 Debug.Log("Button 1 pressed!");
                             }
 
@@ -144,20 +147,20 @@ public class ArduinoConnector : MonoBehaviour
                 }
             }
         }
-        catch (System.TimeoutException)
+        catch (System.TimeoutException) 
         {
-            // normal, ignore
+            // if port times out, ignores and continues, so game can contine
         }
     }
 
-    void OnDisable()
+    void OnDisable() //closes serial port when game is closed, so can be opened if restarted, how kind
     {
         if (serial != null && serial.IsOpen){
             serial.Close();
         }
     }
 
-    void OnApplicationQuit()
+    void OnApplicationQuit() // same thing, if the game is quitted, closes the port so it can be opened again if restarted
     {
         if (serial != null && serial.IsOpen){
             serial.Close();

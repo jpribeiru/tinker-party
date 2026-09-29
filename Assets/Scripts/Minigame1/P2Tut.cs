@@ -4,6 +4,8 @@ public class P2Tut : MonoBehaviour
 {   private RectTransform rect;
     public static bool goalTouch2 = false;
     
+
+    //works same as p1tut, read comments there
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {

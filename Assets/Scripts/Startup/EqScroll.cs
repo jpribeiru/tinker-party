@@ -64,6 +64,14 @@ public class EqScroll : MonoBehaviour, IEndDragHandler
         }
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Next();
+        }
+    }
+
 }
 
 

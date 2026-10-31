@@ -79,6 +79,14 @@ public class SwipeController : MonoBehaviour, IEndDragHandler
         }
 
         }
+        if (Input.GetKeyDown(KeyCode.RightArrow) && currentPage < maxPage)
+        {
+            Next();
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && currentPage > 1)
+        {
+            Prev(); 
+        }
     }
 
 }

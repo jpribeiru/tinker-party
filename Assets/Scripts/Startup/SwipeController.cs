@@ -67,18 +67,7 @@ public class SwipeController : MonoBehaviour, IEndDragHandler
 
     void Update()
     {
-        if(SceneManager.GetActiveScene().name == "Main Menu")
-        {
-            if(ArduinoConnector.button1PressedOnce && currentPage > 1)
-        {
-            Prev();
-        }
-        if(ArduinoConnector.button2PressedOnce && currentPage < maxPage)
-        {
-            Next();
-        }
 
-        }
         if (Input.GetKeyDown(KeyCode.RightArrow) && currentPage < maxPage)
         {
             Next();

@@ -8,8 +8,6 @@ public class GameHandler : MonoBehaviour
 { // gathers a whole buncbh of game objects tgat ut wukk yse
     public Player1 player1;
     public Player2 player2;
-    public GameObject tutOverlay;
-    public TextMeshProUGUI countdownText;
     public GameObject gameEnder;
 
     public GameObject tie;
@@ -21,14 +19,13 @@ public class GameHandler : MonoBehaviour
     public static string winners = "undecided";
     void Start()
     {
-        gameStarted = false; //doesnt start actual game loop until the menu test is over, explained below
+        gameStarted = true; //doesnt start actual game loop until the menu test is over, explained below
         gameEnder.SetActive(false);
 
-        player1.GetComponent<Player1>().enabled = false; //player cant move until tut over, script disabled
-        player2.GetComponent<Player2>().enabled = false;
-        GetComponent<PlayableDirector>().enabled = false; //track doesnt start until tut over, script disabled
-        tutOverlay.SetActive(true); // show the tut
-
+        player1.GetComponent<Player1>().enabled = true; //player cant move until tut over, script disabled
+        player2.GetComponent<Player2>().enabled = true;
+        GetComponent<PlayableDirector>().enabled = true; //track doesnt start until tut over, script disabled
+        
     }
     IEnumerator Delay() // i heard this is a good way to make a delay, so i used it to make the end screen stay for 5 seconds before going back to main menu
     {
@@ -40,28 +37,6 @@ public class GameHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(gameStarted == false){ //aka if tut still running
-            
-
-            if (P1Tut.goalTouch1 && P2Tut.goalTouch2) // aim is that both players have to move their cars onto the green spot to ttest that the potentiometer is working, which means moving their dial to the MAX
-            { 
-                countdownTime -= Time.deltaTime; // hold for 5 sec
-                countdownText.text = Mathf.Max(0f, countdownTime).ToString("F1");
-                if (countdownTime < 0f)
-                {
-                    gameStarted = true; // game starts
-                    tutOverlay.SetActive(false);
-                    player1.GetComponent<Player1>().enabled = true;
-                    player2.GetComponent<Player2>().enabled = true;
-                    GetComponent<PlayableDirector>().enabled = true;
-                }
-            }
-            else
-            {
-                countdownTime = 5f;
-                countdownText.text = "";
-            }
-        }
         if (gameStarted == true){
             if(gameEnder.activeSelf == false){ //prevents game continously restarting
             Debug.Log("Game is running");

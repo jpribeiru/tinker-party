@@ -56,7 +56,7 @@ public class M2P1Tut : MonoBehaviour
                 {
                     playersReady = true;
                     Debug.Log("Both players ready!"); // starts game once done
-                    SceneManager.LoadScene(sceneToGoTo);
+                    GoToScene(); // goes to the actual game scene
                 }
             }
             else
@@ -74,5 +74,10 @@ public class M2P1Tut : MonoBehaviour
             notReady2.SetActive(true);
             timer.text = timerPlacText;
         }
+    }
+    public void GoToScene() // used by the button to skip tutorial
+    {
+        Debug.Log("Going to scene: " + sceneToGoTo);
+        SceneManager.LoadScene(sceneToGoTo);
     }
 }

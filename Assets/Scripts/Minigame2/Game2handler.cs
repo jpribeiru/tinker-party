@@ -12,7 +12,6 @@ public class Game2handler : MonoBehaviour
     private CubeSpawner currentSpawner;
     public Camera mainCamera;
 
-    public GameObject overlay;
     public GameObject P1Win;
     public GameObject P2Win;
 
@@ -39,8 +38,7 @@ public class Game2handler : MonoBehaviour
     {
         Debug.Log("Game started!");
 
-        overlay.SetActive(true);
-        gameRunning = false;
+        gameRunning = true;
 
         P1Win.SetActive(false);
         P2Win.SetActive(false);
@@ -53,11 +51,6 @@ public class Game2handler : MonoBehaviour
     // Update is called once per frame
     private void Update() // game loop
     {
-        if (M2P1Tut.playersReady && !gameRunning) // if both players are ready and the game hasnt started yet, runs the following to start
-        {
-            overlay.SetActive(false); // hide tutorial and run game loop
-            gameRunning = true;
-        }
         if (gameRunning == true && 
         ((ArduinoConnector.button1PressedOnce && spawnerIndex == 1) || 
         (ArduinoConnector.button2PressedOnce && spawnerIndex == 0))) // if gameloop started and the player presses their button in their respective turn (aka to cut the bloc)

@@ -12,8 +12,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: f58f21bc0885e40cb801449cfa43c303
   - enabled: 1
+    path: Assets/Scenes/M1Setup.unity
+    guid: ad3a854074692415abc59975192917cd
+  - enabled: 1
     path: Assets/Scenes/Minigame1.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/M2Setup.unity
+    guid: 764cd6f71e7f247a586162a5c47b9c1d
   - enabled: 1
     path: Assets/Scenes/Minigame2.unity
     guid: 5766caedecd3144419f6ff7a6be10265

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class SwipeController : MonoBehaviour, IEndDragHandler
 {
@@ -61,6 +62,22 @@ public class SwipeController : MonoBehaviour, IEndDragHandler
         else
         {
             MovePage();
+        }
+    }
+
+    void Update()
+    {
+        if(SceneManager.GetActiveScene().name == "Main Menu")
+        {
+            if(ArduinoConnector.button1PressedOnce && currentPage > 1)
+        {
+            Prev();
+        }
+        if(ArduinoConnector.button2PressedOnce && currentPage < maxPage)
+        {
+            Next();
+        }
+
         }
     }
 

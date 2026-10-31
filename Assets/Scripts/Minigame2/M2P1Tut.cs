@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class M2P1Tut : MonoBehaviour
 { //script for the tutorial before minigame 2 starts
@@ -11,13 +12,15 @@ public class M2P1Tut : MonoBehaviour
     public GameObject ready2;
     public GameObject notReady2;
     public TMP_Text timer;
+    [SerializeField] string timerPlacText = "Hold for 3 seconds to start!";
+    [SerializeField] string sceneToGoTo;
     void Start()
     {
         ready1.SetActive(false);
         notReady1.SetActive(true);
         ready2.SetActive(false);
         notReady2.SetActive(true);
-        timer.text = "";
+        timer.text = timerPlacText;
         playersReady = false;
     }
     private void OnEnable()
@@ -53,13 +56,14 @@ public class M2P1Tut : MonoBehaviour
                 {
                     playersReady = true;
                     Debug.Log("Both players ready!"); // starts game once done
+                    SceneManager.LoadScene(sceneToGoTo);
                 }
             }
             else
             {
                 // Reset timer if either player lets go
                 readyTimer = 0f;
-                timer.text = "";
+                timer.text = timerPlacText;
             }
         }
         else
@@ -68,7 +72,7 @@ public class M2P1Tut : MonoBehaviour
             notReady1.SetActive(true);
             ready2.SetActive(false);
             notReady2.SetActive(true);
-            timer.text = "";
+            timer.text = timerPlacText;
         }
     }
 }
